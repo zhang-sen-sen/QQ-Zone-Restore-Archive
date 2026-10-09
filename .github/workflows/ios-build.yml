@@ -68,8 +68,10 @@ jobs:
           open(p, "w", encoding="utf-8").write(s)
           print("injected CODE_SIGNING into", n, "buildSettings blocks")
           EOF
-          npx tauri ios build --target aarch64 --no-bundle
-          APP_PATH=$(find src-tauri/gen/apple/build -name "qzonearchive.app" -path "*Release-iphoneos*" | head -1)
+          # 构建产物 .app 在 export 前已生成；tauri 的 exportArchive 无签名 Team 必然失败（exit 70），
+          # 用 `|| true` 保留 .app，随后手动打包为未签名 IPA
+          npx tauri ios build --target aarch64 || true
+          APP_PATH=$(find src-tauri/gen/apple -name "qzonearchive.app" -path "*Release-iphoneos*" | head -1)
           if [ -z "$APP_PATH" ]; then
             echo "未找到真机 .app 产物"
             exit 1
