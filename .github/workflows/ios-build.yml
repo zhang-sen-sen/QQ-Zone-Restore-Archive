@@ -35,8 +35,9 @@ jobs:
         run: npx tauri ios init
 
       # 模拟器版（无需签名，必定成功；供 Mac 上预览 / 真机调试）
-      - name: Build iOS app (simulator, x86_64)
-        run: npx tauri ios build --target x86_64-apple-ios
+      # tauri CLI 2.x 的 --target 使用简化名：aarch64 / aarch64-sim / x86_64
+      - name: Build iOS app (simulator, arm64)
+        run: npx tauri ios build --target aarch64-sim
 
       - name: Upload simulator app
         uses: actions/upload-artifact@v4
@@ -50,7 +51,7 @@ jobs:
       - name: Build iOS app (device, signed if secrets present)
         run: |
           if [ -n "$IOS_SIGNING_IDENTITY" ] && [ -n "$IOS_PROVISIONING_PROFILE" ]; then
-            npx tauri ios build --target aarch64-apple-ios
+            npx tauri ios build --target aarch64
           else
             echo "未配置 IOS_SIGNING_IDENTITY / IOS_PROVISIONING_PROFILE，跳过签名设备包"
             echo "如需真机安装包，请在仓库 Settings → Secrets 配置后重跑"
