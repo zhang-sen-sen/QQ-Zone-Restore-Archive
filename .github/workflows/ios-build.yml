@@ -60,10 +60,10 @@ jobs:
           IOS_PROVISIONING_PROFILE: ${{ secrets.IOS_PROVISIONING_PROFILE }}
 
       - name: Upload device app (if built)
-        if: ${{ secrets.IOS_SIGNING_IDENTITY != '' && secrets.IOS_PROVISIONING_PROFILE != '' }}
         uses: actions/upload-artifact@v4
         with:
           name: ios-app-device
+          if-no-files-found: warn
           path: |
             src-tauri/gen/apple/build
             src-tauri/target/aarch64-apple-ios/release
