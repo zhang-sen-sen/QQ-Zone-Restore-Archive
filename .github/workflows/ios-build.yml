@@ -68,7 +68,7 @@ jobs:
           open(p, "w", encoding="utf-8").write(s)
           print("injected CODE_SIGNING into", n, "buildSettings blocks")
           EOF
-          npx tauri ios build --target aarch64
+          npx tauri ios build --target aarch64 --no-bundle
           APP_PATH=$(find src-tauri/gen/apple/build -name "qzonearchive.app" -path "*Release-iphoneos*" | head -1)
           if [ -z "$APP_PATH" ]; then
             echo "未找到真机 .app 产物"
