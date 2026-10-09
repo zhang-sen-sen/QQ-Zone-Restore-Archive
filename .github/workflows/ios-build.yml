@@ -53,7 +53,7 @@ jobs:
         run: |
           npx tauri ios init --ci
           cd src-tauri/gen/apple
-          xcodebuild -project qzonearchive.xcodeproj -target qzonearchive_iOS -configuration Release -sdk iphoneos -destination "generic/platform=iOS" -derivedDataPath build CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" CODE_SIGN_STYLE=Manual build
+          xcodebuild -project qzonearchive.xcodeproj -scheme qzonearchive -configuration Release -sdk iphoneos -destination "generic/platform=iOS" -derivedDataPath build CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" CODE_SIGN_STYLE=Manual build
           APP_PATH=$(find build -name "qzonearchive.app" -path "*Release-iphoneos*" | head -1)
           if [ -z "$APP_PATH" ]; then
             echo "未找到真机 .app 产物"
