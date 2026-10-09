@@ -48,19 +48,33 @@ jobs:
             src-tauri/target/aarch64-apple-ios-sim/release
 
       # 真机设备版：无 Apple 开发者签名时产出“未签名 IPA”
-      # tauri CLI 不透明传签名开关给 xcodebuild，这里改用 tauri ios init 生成工程后手动 xcodebuild 直接传签名参数
+      # 在 pbxproj 工程级注入 CODE_SIGNING_ALLOWED=NO（tauri CLI 不透传命令行签名参数），
+      # 再走 tauri ios build（自带 xcode-script 服务器），产出可后续自行签名的未签名 .app
       - name: Build iOS app (device, unsigned IPA)
         run: |
           npx tauri ios init --ci
-          cd src-tauri/gen/apple
-          xcodebuild -project qzonearchive.xcodeproj -scheme qzonearchive_iOS -configuration Release -sdk iphoneos -destination "generic/platform=iOS" -derivedDataPath build CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" CODE_SIGN_STYLE=Manual build
-          APP_PATH=$(find build -name "qzonearchive.app" -path "*Release-iphoneos*" | head -1)
+          python3 - <<'EOF'
+          import re
+          p = "src-tauri/gen/apple/qzonearchive.xcodeproj/project.pbxproj"
+          s = open(p, encoding="utf-8").read()
+          inject = (
+              "CODE_SIGNING_ALLOWED = NO;\n"
+              "CODE_SIGNING_REQUIRED = NO;\n"
+              "CODE_SIGN_IDENTITY = \"\";\n"
+              "CODE_SIGN_STYLE = Manual;\n"
+              "PROVISIONING_PROFILE_SPECIFIER = \"\";\n"
+          )
+          s, n = re.subn(r"(buildSettings = \{)", lambda m: m.group(1) + "\n" + inject, s)
+          open(p, "w", encoding="utf-8").write(s)
+          print("injected CODE_SIGNING into", n, "buildSettings blocks")
+          EOF
+          npx tauri ios build --target aarch64
+          APP_PATH=$(find src-tauri/gen/apple/build -name "qzonearchive.app" -path "*Release-iphoneos*" | head -1)
           if [ -z "$APP_PATH" ]; then
             echo "未找到真机 .app 产物"
             exit 1
           fi
           echo "APP_PATH=$APP_PATH"
-          cd ../../..
           rm -rf Payload
           mkdir -p Payload
           cp -R "$APP_PATH" Payload/
