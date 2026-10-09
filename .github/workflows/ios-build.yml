@@ -1,0 +1,69 @@
+name: "Build iOS (iPhone + iPad Universal)"
+
+# 触发方式：
+#   1. 在 GitHub 仓库页面 Actions 标签页手动运行（workflow_dispatch）
+#   2. 推送 v 开头的 tag（如 v2.0.0）
+on:
+  workflow_dispatch:
+  push:
+    tags: ["v*"]
+
+jobs:
+  ios-build:
+    runs-on: macos-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust with iOS targets
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: |
+            aarch64-apple-ios
+            aarch64-apple-ios-sim
+            x86_64-apple-ios
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Initialize iOS project
+        run: npx tauri ios init
+
+      # 模拟器版（无需签名，必定成功；供 Mac 上预览 / 真机调试）
+      - name: Build iOS app (simulator, arm64)
+        run: npx tauri ios build --target aarch64-apple-ios-sim
+
+      - name: Upload simulator app
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-app-simulator
+          path: |
+            src-tauri/gen/apple/build
+            src-tauri/target/aarch64-apple-ios-sim/release
+
+      # 真机设备版：如配置了 Apple 签名证书 secrets 则签名打包
+      - name: Build iOS app (device, signed if secrets present)
+        run: |
+          if [ -n "$IOS_SIGNING_IDENTITY" ] && [ -n "$IOS_PROVISIONING_PROFILE" ]; then
+            npx tauri ios build --target aarch64-apple-ios
+          else
+            echo "未配置 IOS_SIGNING_IDENTITY / IOS_PROVISIONING_PROFILE，跳过签名设备包"
+            echo "如需真机安装包，请在仓库 Settings → Secrets 配置后重跑"
+          fi
+        env:
+          IOS_SIGNING_IDENTITY: ${{ secrets.IOS_SIGNING_IDENTITY }}
+          IOS_PROVISIONING_PROFILE: ${{ secrets.IOS_PROVISIONING_PROFILE }}
+
+      - name: Upload device app (if built)
+        if: ${{ secrets.IOS_SIGNING_IDENTITY != '' && secrets.IOS_PROVISIONING_PROFILE != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-app-device
+          path: |
+            src-tauri/gen/apple/build
+            src-tauri/target/aarch64-apple-ios/release
