@@ -3,7 +3,7 @@
 AI collaborators: please read AGENTS.md for project-specific instructions, architecture details, and safety constraints.
 </details>
 
-# QQ Zone Restore Archive
+# QQ 空间恢复归档 · 便携版 v2.0.0
 
 [![Rust](https://img.shields.io/badge/Rust-1.77%2B-orange)](https://www.rust-lang.org/)
 [![Tauri](https://img.shields.io/badge/Tauri-2.0-blue)](https://v2.tauri.app/)
@@ -11,18 +11,55 @@ AI collaborators: please read AGENTS.md for project-specific instructions, archi
 [![License](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 
 将 QQ 空间动态、照片、视频与互动记录安全归档到本地的桌面 / 移动端工具。
-
-作者：[https://github.com/xiaosu19](https://github.com/xiaosu19)
-
-项目地址：[xiaosu19/QQ-Zone-Restore-Archive](https://github.com/xiaosu19/QQ-Zone-Restore-Archive)
+本仓库为 **QzoneArchive 的本地定制分支（v2.0.0）**，在原版基础上修复了 18 项媒体模块缺陷并新增多项功能，发布 **Windows 便携版（单 EXE）与 Android 版**。
 
 > [!IMPORTANT]
-> 本项目是基于 [Gaoshu705/QzoneArchive](https://github.com/Gaoshu705/QzoneArchive) 的 GPLv3 二次开发版本，并参考了 [LibraHp/GetQzonehistory](https://github.com/LibraHp/GetQzonehistory)、[ShunCai/QZoneExport](https://github.com/ShunCai/QZoneExport)、[salt-fishes/qzone-archiver](https://github.com/salt-fishes/qzone-archiver)、[11273/QzonePhoto](https://github.com/11273/QzonePhoto) 与 [Gu-Heping/onebot-qzone](https://github.com/Gu-Heping/onebot-qzone) 的历史取数、空间资料接口、评论正文和昵称解析思路。QZoneExport 参考实现遵循 Apache-2.0；详见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。原项目作者、参考项目作者和腾讯公司均不对本分支提供背书或担保。
+> 本项目基于 [Gaoshu705/QzoneArchive](https://github.com/Gaoshu705/QzoneArchive) 与 [xiaosu19/QQ-Zone-Restore-Archive](https://github.com/xiaosu19/QQ-Zone-Restore-Archive)（v1.1.0，commit `e9dcb73`）二次开发，并参考了 [LibraHp/GetQzonehistory](https://github.com/LibraHp/GetQzonehistory)、[ShunCai/QZoneExport](https://github.com/ShunCai/QZoneExport)、[salt-fishes/qzone-archiver](https://github.com/salt-fishes/qzone-archiver)、[11273/QzonePhoto](https://github.com/11273/QzonePhoto) 与 [Gu-Heping/onebot-qzone](https://github.com/Gu-Heping/onebot-qzone) 的历史取数、空间资料接口、评论正文和昵称解析思路。QZoneExport 参考实现遵循 Apache-2.0；详见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。原项目作者、参考项目作者和腾讯公司均不对本分支提供背书或担保。
 
 > [!WARNING]
 > 本项目不是腾讯、QQ 或 QQ 空间官方产品。所谓“恢复已删除说说”仅指：当已删除内容仍残留在点赞、评论、回复等互动记录中时，尝试还原其中可取得的正文和媒体信息；没有互动痕迹、已被服务端彻底清除、无权访问或接口不再返回的内容无法恢复，也不保证归档结果完整。请仅处理本人账号或已获得充分授权的内容，并自行承担账号限制、第三方接口变化、数据遗漏和本地数据保管风险。
 
-如果本项目对你有帮助，可以支持并 Star [xiaosu19/QQ-Zone-Restore-Archive](https://github.com/xiaosu19/QQ-Zone-Restore-Archive)。
+## 下载与安装
+
+请从本仓库 [Releases](https://github.com/zhang-sen-sen/QQ-Zone-Restore-Archive/releases) 下载：
+
+| 资产 | 说明 |
+| --- | --- |
+| `QQ-Zone-Archive-v2.0.0-portable.exe` | **Windows 便携版**：单文件 EXE，无需安装，双击即可运行 |
+| `QQ-Zone-Archive-v2.0.0-android.apk` | **Android 版**（arm64-v8a，已签名） |
+| `QQ-Zone-Archive-v2.0.0-source.zip` | 完整源代码（含修改记录与许可证） |
+| `usage-notes.txt` | 使用说明（含修改记录、许可证、免责声明） |
+
+### 使用说明（便携版）
+
+- **必须解压后运行**：请先把压缩包解压到本地文件夹再运行 EXE；在压缩包内直接双击会被检测并提示「请先解压后再运行」，不会进入主界面
+- 运行环境：Windows 10 / 11（需 Microsoft Edge WebView2，Win10+ 通常自带）
+- 左侧「空间资料 → 相册 / 视频」点击「从 QQ 空间读取」同步；支持扫码登录与网页登录
+- 归档任务在「归档工作台 → 归档任务」查看进度，支持断点续传
+- 归档完成（或从「说说归档」归档动态）后，可浏览、搜索、导出 HTML，媒体可在应用内直接查看 / 播放
+
+### 数据存放位置
+
+- **所有数据都保存在 EXE 所在目录**（数据库、登录会话、媒体文件），随软件整体迁移与备份
+- 数据按登录的 QQ 账号分目录存放，每个账号一个独立文件夹（`qq_QQ号`），互不干扰：
+
+  ```
+  软件目录/
+  └── qq_QQ号/
+      ├── qzone-archive.sqlite3   # 该账号的归档数据库（按账号分开）
+      ├── images/                 # 图片（归档原图 + 相册下载图片）
+      └── videos/                 # 视频（归档视频 + 相册下载视频）
+  ```
+
+- 切换登录账号后自动读写对应账号目录；首次使用新版登录时，旧版存放在软件根目录的数据库与 images / videos 会自动迁移到当前账号目录
+- 不再生成「媒体缓存」文件夹：下载的媒体按类型自动归入 images / videos
+- 缓存媒体文件按「上传时间」命名（如 `2019-02-08_10-50.jpg`，同一时间多个媒体带短哈希后缀区分），与界面卡片时间一致
+- 删除软件不会自动清除归档数据；彻底清除请在「工具与设置 → 设置 → 清除全部应用数据」（仅清除当前登录账号目录）
+
+### 登录与安全
+
+- 登录凭据保存在操作系统凭据保管库（Windows 凭据管理器），不写入数据库、日志或前端存储
+- 归档过程中请勿切换 QQ 客户端账号，以免触发风控；频繁限流时建议稍后再继续
 
 ## 功能
 
@@ -30,26 +67,40 @@ AI collaborators: please read AGENTS.md for project-specific instructions, archi
 - **结构化互动**：还原点赞用户、评论、回复人与被回复人，补全可取得的昵称，并提供联系人排行和评论往来视图
 - **深度扫描与续传**：顺序探测历史记录，在最后命中后继续验证空尾；被限流或中断时保留断点和已经写入的数据
 - **资料独立归档**：相册、相册照片、独立视频、留言板与 QQ 空间网页端旧收藏分别分页同步，不与说说混在一起
-- **媒体整理**：按年份浏览说说照片和视频，保留多个可用清晰度候选，过滤头像、点赞图标和空间装饰资源
-- **本地优先**：SQLite 数据库、媒体缓存和导出文件都保存在软件安装目录（可执行文件旁的 `app-data` 文件夹）；登录会话只进入操作系统安全凭据库
+- **原图 / 原视频优先**：说说图片按质量分稳定排序下载原图，psc 地址优先原图变体 `/o`；相册视频解析真实播放直链并在应用内播放，403 签名过期自动刷新
+- **媒体整理**：按年份浏览说说照片和视频，缓存文件按上传时间命名，相册 / 说说同图内容级去重、不重复下载
+- **多账号隔离**：数据库与媒体按 QQ 账号分目录（`qq_QQ号`），旧数据自动迁移
+- **本地优先**：SQLite 数据库、媒体缓存和导出文件都保存在软件目录（便携版为 EXE 旁）；登录会话只进入操作系统安全凭据库
 - **检索与导出**：支持全文搜索、年份筛选、时间排序、批量管理与离线 HTML 导出
 - **桌面体验**：面向大数据量重新设计紧凑双列卡片、资料导航、暗色模式和窄屏布局
-- **跨平台发行**：提供 Windows、macOS（Intel / Apple 芯片）、Linux、Android、iOS 未签名包与 NixOS 构建
+- **跨平台发行**：提供 Windows 便携版（单 EXE）、Android APK、macOS / Linux 构建与 iOS 工作流
 
 完整版本历史请查看 [CHANGELOG.md](CHANGELOG.md)。
 
-## 下载与安装
+## 修改记录（相对上游 v1.1.0，共 18 项）
 
-请从本仓库的 [Releases](https://github.com/xiaosu19/QQ-Zone-Restore-Archive/releases) 下载与系统匹配的安装包：
+> 详细对比与代码级说明见仓库根目录 **[《与原作者的代码对比及全部更改记录.md》](与原作者的代码对比及全部更改记录.md)**。
 
-- Windows：NSIS 安装程序（`.exe`）
-- macOS：Intel `x64` 或 Apple 芯片 `aarch64` 安装镜像（`.dmg`）
-- Linux：AppImage、Debian/Ubuntu `deb`、Fedora/openSUSE `rpm`
-- Android：通用 `apk`
-- iOS：未签名 `ipa`，需要自行签名后安装
-- NixOS：包含 Nix closure 的离线安装包
-
-macOS 包采用临时签名，首次打开若被 Gatekeeper 拦截，请在“系统设置 → 隐私与安全性”中确认打开。iOS 包未签名，不能直接安装或提交 App Store。
+| # | 功能 / 修复 |
+| --- | --- |
+| 1 | 修复「相册打开任何照片都显示第一张缓存图」（URL 哈希唯一命名缓存） |
+| 2 | 新增图片查看器（ImageViewer）：放大 / 缩小 / 旋转 90° / 复位 / 保存 |
+| 3 | 修复「相册里实际是视频的条目被当成图片」（is_video 识别 + 应用内播放） |
+| 4 | 修复「视频模块点击播放视频无反应」（下载白名单加入 gtimg.com / myqcloud.com） |
+| 5 | 修复「部分视频获取不到地址」（服务下线视频回退封面并提示） |
+| 6 | 数据目录便携化：所有数据（库 / 会话 / 媒体）保存在软件目录 |
+| 7 | 取消「媒体缓存」文件夹：按类型自动归入 images / videos |
+| 8 | 缓存媒体按上传时间命名（年-月-日 时:分，短哈希防重名） |
+| 9 | 修复「2018-2019 年相册老视频播放地址失效」（顺序映射解析直链，实测 42 条全通） |
+| 10 | 新增视频播放地址过期自动刷新（vkey 403 自动重同步后继续播放） |
+| 11 | 数据按 QQ 账号分目录（qq_QQ号，数据库按账号分开，旧数据自动迁移） |
+| 12 | 修复「年份 / 排序下拉框浮层跑到左侧」（全部 Select append-to="self"） |
+| 13 | 说说归档图片按上传时间命名 |
+| 14 | 说说归档图片缓存原图（原图优先排序 + 原图地址哈希命名） |
+| 15 | 说说归档图片真正原图（psc `/o` 变体恒返原图）+ 相册 / 说说同图识别不重复下载 |
+| 16 | 同图去重升级为「内容级合并」（media_dedup 表，token 不同也合并） |
+| 17 | 版本号更新至 2.0.0 + 清理 public/runtime 冗余截图（体积减约 3.9MB） |
+| 18 | 必须解压后才能运行（压缩包内运行检测，防止数据写入挂载路径） |
 
 ## 技术栈
 
@@ -94,6 +145,10 @@ npm run tauri:build:windows
 # Windows NSIS + MSI
 npm run tauri:build:windows:all
 
+# Windows 便携版（单 EXE）
+npm run tauri build --no-bundle
+#（将 target/release/QQ 空间恢复归档.exe 与资源一并放入便携版目录）
+
 # Android APK
 npm run tauri android build
 ```
@@ -106,9 +161,10 @@ npm run tauri android build
 │   │   ├── DashboardView   # 概览（统计 + 互动排行）
 │   │   ├── ArchivesView    # 归档内容（分类浏览、搜索、导出）
 │   │   ├── MediaView       # 媒体时光轴
+│   │   ├── LibraryView     # 相册（应用内播放 / 查看大图）
 │   │   ├── TasksView       # 归档任务
 │   │   └── SettingsView    # 设置
-│   ├── components/         # 通用组件
+│   ├── components/         # 通用组件（含 ImageViewer.vue 图片查看器）
 │   ├── stores/             # Pinia 状态管理
 │   ├── utils/              # 工具函数与类型
 │   └── layouts/            # 布局组件
@@ -116,9 +172,9 @@ npm run tauri android build
 │   └── src/
 │       ├── main.rs         # 入口
 │       ├── lib.rs          # Tauri 命令注册
-│       ├── qlogin.rs       # QQ 登录（二维码 + 网页）
+│       ├── qlogin.rs       # QQ 登录（二维码 + 网页，含账号分目录）
 │       ├── qzone.rs        # QQ 空间接口
-│       └── archive.rs      # 归档引擎 + 数据库
+│       └── archive.rs      # 归档引擎 + 数据库（核心改动）
 └── src-tauri/capabilities/ # Tauri 权限配置
 ```
 
@@ -139,7 +195,7 @@ npm run tauri android build
 - **二维码登录**：调用 QQ 空间移动端扫码登录流程，全程不接触密码
 - **网页登录**（桌面端）：打开独立窗口加载 QQ 登录页，通过 WebView Cookie API 提取登录凭证
 
-登录凭证（Cookie）不会写入 SQLite、浏览器本地存储或日志。桌面端在用户登录成功后将必要会话加密保存到操作系统安全凭据库，用于下次启动恢复登录；退出登录或“删除所有数据”会清除该凭据。QQ 会话自身过期后仍需重新登录。
+登录凭证（Cookie）不会写入 SQLite、浏览器本地存储或日志。桌面端在用户登录成功后将必要会话加密保存到操作系统安全凭据库，用于下次启动恢复登录；退出登录或「删除所有数据」会清除该凭据。QQ 会话自身过期后仍需重新登录。
 
 ## 注意事项
 
@@ -147,16 +203,28 @@ npm run tauri android build
 - 归档过程中不要切换 QQ 客户端账号，否则可能有冻结风险
 - 出现频繁提示时建议换个时间段继续，程序支持断点续传
 - QQ 的视频签名有时效性，过期后需要重新归档以更新视频地址
-- 数据默认保存在安装目录（`app-data` 文件夹）下，随程序整体迁移；建议定期将重要资料额外备份
+- 数据默认保存在软件目录下，随程序整体迁移；建议定期将重要资料额外备份
+
+## 已知限制
+
+- 从未被点赞或评论过的说说无法恢复（互动列表中没有记录）
+- QQ 视频地址带时效签名，过期后需重新同步刷新地址
+- 部分 2019 年 QQ 小视频（v.qqstory.qq.com）因腾讯侧服务下线、域名无法解析，仅可查看封面
+- 相册老视频依赖「视频」模块的同步数据解析播放直链：请先完成「视频」模块同步再播放相册视频
 
 ## 免责声明
 
 本软件是用于整理和备份个人 QQ 空间资料的本地工具，与腾讯公司、QQ、QQ 空间及其关联主体不存在隶属、授权、合作关系。使用者应在合法授权范围内使用，并自行承担使用风险。详见应用内《免责声明与使用须知》。
 
+## 许可证
+
+本项目采用 [GNU GPLv3](LICENSE)（GNU General Public License v3.0）开源许可证：
+
+- 您可以自由使用、修改与分发本软件，但任何修改或衍生作品必须以相同许可证（GPLv3）开源发布并提供源代码
+- 本软件按“现状”提供，不附带任何明示或默示的担保
+- 上游原作者：[xiaosu19/QQ-Zone-Restore-Archive](https://github.com/xiaosu19/QQ-Zone-Restore-Archive)（GPLv3）
+- 上游主仓库：[Gaoshu705/QzoneArchive](https://github.com/Gaoshu705/QzoneArchive)（GPLv3）
+
 ## 友情链接
 
 * [LINUX DO](https://linux.do/) - 新的理想型社区
-
-## 许可证
-
-本项目采用 [GPLv3](LICENSE) 许可证。
