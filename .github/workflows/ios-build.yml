@@ -52,7 +52,8 @@ jobs:
       - name: Build iOS app (device, unsigned IPA)
         run: |
           export CODE_SIGNING_ALLOWED=NO
-          sed -i '' 's/CODE_SIGN_STYLE = Automatic;/CODE_SIGN_STYLE = Manual; CODE_SIGNING_ALLOWED = NO; CODE_SIGNING_REQUIRED = NO; CODE_SIGN_IDENTITY = "";/g' src-tauri/gen/apple/qzonearchive.xcodeproj/project.pbxproj
+          perl -i -pe 's/CODE_SIGN_STYLE\s*=\s*Automatic;/CODE_SIGN_STYLE = Manual; CODE_SIGNING_ALLOWED = NO; CODE_SIGNING_REQUIRED = NO; CODE_SIGN_IDENTITY = "";/g' src-tauri/gen/apple/qzonearchive.xcodeproj/project.pbxproj
+          grep -c "CODE_SIGNING_ALLOWED = NO" src-tauri/gen/apple/qzonearchive.xcodeproj/project.pbxproj
           npx tauri ios build --target aarch64
           APP_PATH=$(find src-tauri/gen/apple/build -maxdepth 3 -name "qzonearchive.app" ! -path "*sim*" | head -1)
           if [ -z "$APP_PATH" ]; then
