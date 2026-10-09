@@ -4,7 +4,7 @@ title: 安装
 
 # 安装
 
-从 [GitHub Releases](https://github.com/xiaosu19/QQ-Zone-Restore-Archive/releases) 下载与设备对应的最新版本。
+从 [GitHub Releases](https://github.com/zhang-sen-sen/QQ-Zone-Restore-Archive/releases) 下载与设备对应的最新版本。
 
 ## Windows
 

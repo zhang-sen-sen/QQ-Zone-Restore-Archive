@@ -5,7 +5,7 @@ import { withBase } from "vitepress";
 type Platform = "windows" | "macos" | "android" | "linux";
 type ThemeMode = "system" | "light" | "dark";
 
-const githubUrl = "https://github.com/xiaosu19/QQ-Zone-Restore-Archive";
+const githubUrl = "https://github.com/zhang-sen-sen/QQ-Zone-Restore-Archive";
 const releaseUrl = `${githubUrl}/releases/latest`;
 const scrolled = ref(false);
 const selectedPlatform = ref<Platform>("windows");
