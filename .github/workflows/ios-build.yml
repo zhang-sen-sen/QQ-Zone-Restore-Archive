@@ -35,8 +35,8 @@ jobs:
         run: npx tauri ios init
 
       # 模拟器版（无需签名，必定成功；供 Mac 上预览 / 真机调试）
-      - name: Build iOS app (simulator, arm64)
-        run: npx tauri ios build --target aarch64-apple-ios-sim
+      - name: Build iOS app (simulator, x86_64)
+        run: npx tauri ios build --target x86_64-apple-ios
 
       - name: Upload simulator app
         uses: actions/upload-artifact@v4
