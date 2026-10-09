@@ -9,7 +9,7 @@ export default defineConfig({
   themeConfig: {
     nav: [
       { text: "文档", link: "/intro/" },
-      { text: "GitHub", link: "https://github.com/xiaosu19/QQ-Zone-Restore-Archive" },
+      { text: "GitHub", link: "https://github.com/zhang-sen-sen/QQ-Zone-Restore-Archive" },
     ],
     sidebar: [
       { text: "开始使用", items: [{ text: "概览", link: "/intro/" }, { text: "安装", link: "/install/" }, { text: "首次归档", link: "/first-archive/" }, { text: "数据与安全", link: "/data-and-safety/" }] },
