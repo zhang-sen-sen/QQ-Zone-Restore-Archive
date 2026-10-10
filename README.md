@@ -11,7 +11,7 @@ AI collaborators: please read AGENTS.md for project-specific instructions, archi
 [![License](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 
 将 QQ 空间动态、照片、视频与互动记录安全归档到本地的桌面 / 移动端工具。
-本仓库为 **QzoneArchive 的本地定制分支（v2.0.0）**，在原版基础上修复了 18 项媒体模块缺陷并新增多项功能，发布 **Windows 便携版（单 EXE）与 Android 版**。
+本仓库为 **QzoneArchive 的本地定制分支（v2.0.0）**，在原版基础上修复了 18 项媒体模块缺陷并新增多项功能，发布 **Windows（安装版 / 便携版）、macOS、Linux、Android 与 iOS（未签名 IPA）多端版本**。
 
 > [!IMPORTANT]
 > 本项目基于 [Gaoshu705/QzoneArchive](https://github.com/Gaoshu705/QzoneArchive) 与 [xiaosu19/QQ-Zone-Restore-Archive](https://github.com/xiaosu19/QQ-Zone-Restore-Archive)（v1.1.0，commit `e9dcb73`）二次开发，并参考了 [LibraHp/GetQzonehistory](https://github.com/LibraHp/GetQzonehistory)、[ShunCai/QZoneExport](https://github.com/ShunCai/QZoneExport)、[salt-fishes/qzone-archiver](https://github.com/salt-fishes/qzone-archiver)、[11273/QzonePhoto](https://github.com/11273/QzonePhoto) 与 [Gu-Heping/onebot-qzone](https://github.com/Gu-Heping/onebot-qzone) 的历史取数、空间资料接口、评论正文和昵称解析思路。QZoneExport 参考实现遵循 Apache-2.0；详见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。原项目作者、参考项目作者和腾讯公司均不对本分支提供背书或担保。
@@ -25,15 +25,26 @@ AI collaborators: please read AGENTS.md for project-specific instructions, archi
 
 | 资产 | 说明 |
 | --- | --- |
-| `QQ-Zone-Archive-v2.0.0-portable.exe` | **Windows 便携版**：单文件 EXE，无需安装，双击即可运行 |
+| `QQ-Zone-Archive-2.0.0-setup.exe` | **Windows 安装版**（NSIS，默认安装到 `D:\QQ空间恢复归档`，中文开始菜单） |
+| `QQ-Zone-Archive-v2.0.0-portable.exe` | **Windows 便携版**：单文件 EXE，无需安装，解压即用（**必须解压后运行**） |
+| `QQ-Zone-Archive-v2.0.0-macos-x64.dmg` | **macOS Intel**（x64）安装包 |
+| `QQ-Zone-Archive-v2.0.0-macos-aarch64.dmg` | **macOS Apple Silicon**（arm64）安装包 |
+| `QQ-Zone-Archive-v2.0.0-linux-amd64.AppImage` | **Linux x86_64** 免安装版 |
+| `QQ-Zone-Archive-v2.0.0-linux-amd64.deb` | **Linux x86_64**（Debian / Ubuntu 系） |
+| `QQ-Zone-Archive-v2.0.0-linux-x86_64.rpm` | **Linux x86_64**（Fedora / RHEL 系） |
 | `QQ-Zone-Archive-v2.0.0-android.apk` | **Android 版**（arm64-v8a，已签名） |
-| `QQ-Zone-Archive-v2.0.0-source.zip` | 完整源代码（含修改记录与许可证） |
-| `usage-notes.txt` | 使用说明（含修改记录、许可证、免责声明） |
+| `QQ-Zone-Archive-v2.0.0-ios-unsigned.ipa` | **iOS 未签名 IPA**（iPhone + iPad 通用，需自行签名后安装） |
+| `QQ-Zone-Archive-v2.0.0-source.zip` | 完整源代码（含修改记录、对比文档与许可证） |
 
-### 使用说明（便携版）
+### 使用说明
 
-- **必须解压后运行**：请先把压缩包解压到本地文件夹再运行 EXE；在压缩包内直接双击会被检测并提示「请先解压后再运行」，不会进入主界面
-- 运行环境：Windows 10 / 11（需 Microsoft Edge WebView2，Win10+ 通常自带）
+- **Windows 便携版**：请先把压缩包解压到本地文件夹再运行 EXE；在压缩包内直接双击会被检测并提示「请先解压后再运行」，不会进入主界面
+- **Windows 安装版**：NSIS 向导默认安装到 `D:\QQ空间恢复归档`（软件需要写入安装目录，不建议装到 Program Files）；开始菜单文件夹为「QQ空间恢复归档」
+- **macOS**：按芯片选择 x64 或 aarch64 的 dmg；首次启动如提示「无法验证开发者」，请在系统设置「隐私与安全性」中允许打开
+- **Linux**：AppImage 执行 `chmod +x` 后运行；deb / rpm 使用系统包管理器安装；NixOS 用户请使用源码构建
+- **Android**：下载 apk 后允许「安装未知来源应用」即可安装
+- **iOS**：未签名 IPA 无法直接安装到设备，需使用 Apple 开发者账号（或自签名工具）签名后安装；也可在 Mac 上用于模拟器调试
+- 运行环境（Windows）：Windows 10 / 11（需 Microsoft Edge WebView2，Win10+ 通常自带）
 - 左侧「空间资料 → 相册 / 视频」点击「从 QQ 空间读取」同步；支持扫码登录与网页登录
 - 归档任务在「归档工作台 → 归档任务」查看进度，支持断点续传
 - 归档完成（或从「说说归档」归档动态）后，可浏览、搜索、导出 HTML，媒体可在应用内直接查看 / 播放
