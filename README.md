@@ -84,7 +84,7 @@ AI collaborators: please read AGENTS.md for project-specific instructions, archi
 - **本地优先**：SQLite 数据库、媒体缓存和导出文件都保存在软件目录（便携版为 EXE 旁）；登录会话只进入操作系统安全凭据库
 - **检索与导出**：支持全文搜索、年份筛选、时间排序、批量管理与离线 HTML 导出
 - **桌面体验**：面向大数据量重新设计紧凑双列卡片、资料导航、暗色模式和窄屏布局
-- **跨平台发行**：提供 Windows 便携版（单 EXE）、Android APK、macOS / Linux 构建与 iOS 工作流
+- **跨平台发行**：提供 Windows 便携版（单 EXE）、Android APK 与 macOS / Linux 构建
 
 完整版本历史请查看 [CHANGELOG.md](CHANGELOG.md)。
 

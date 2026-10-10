@@ -138,27 +138,6 @@ jobs:
           if-no-files-found: error
           retention-days: 90
 
-  ios:
-    runs-on: macos-15
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-      - uses: dtolnay/rust-toolchain@stable
-        with:
-          targets: aarch64-apple-ios
-      - run: npm ci
-      - run: npx tauri ios init --ci
-      - run: npx tauri ios build --target aarch64 --ci --no-sign
-      - uses: actions/upload-artifact@v4
-        with:
-          name: qzonearchive-ios-unsigned-${{ github.sha }}
-          path: src-tauri/gen/apple/**/*.ipa
-          if-no-files-found: error
-          retention-days: 90
-
   nixos:
     runs-on: ubuntu-latest
     timeout-minutes: 60
@@ -197,7 +176,7 @@ jobs:
           retention-days: 90
 
   publish-nightly:
-    needs: [windows, macos, linux, android, ios, nixos]
+    needs: [windows, macos, linux, android, nixos]
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     permissions:
@@ -225,10 +204,6 @@ jobs:
           path: artifacts/android
       - uses: actions/download-artifact@v7
         with:
-          name: qzonearchive-ios-unsigned-${{ github.sha }}
-          path: artifacts/ios-unsigned
-      - uses: actions/download-artifact@v7
-        with:
           name: qzonearchive-nixos-${{ github.sha }}
           path: artifacts/nixos
       - name: Publish nightly pre-release
@@ -244,7 +219,6 @@ jobs:
           cp artifacts/linux/*.deb nightly/QzoneArchive-nightly_amd64.deb
           cp artifacts/linux/*.rpm nightly/QzoneArchive-nightly_x86_64.rpm
           cp artifacts/android/*.apk nightly/QzoneArchive-nightly-universal.apk
-          cp artifacts/ios-unsigned/*.ipa nightly/QzoneArchive-nightly-ios-arm64-unsigned.ipa
           cp artifacts/nixos/*.tar.gz nightly/qzonearchive-nixos-nightly-x86_64-linux.tar.gz
           ls -lh nightly
           gh release create nightly \
