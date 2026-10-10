@@ -2,7 +2,7 @@
 import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
 import { withBase } from "vitepress";
 
-type Platform = "windows" | "macos" | "android" | "linux";
+type Platform = "windows";
 type ThemeMode = "system" | "light" | "dark";
 
 const githubUrl = "https://github.com/zhang-sen-sen/QQ-Zone-Restore-Archive";
@@ -14,9 +14,6 @@ const revealObserver = ref<IntersectionObserver | null>(null);
 
 const platforms = [
   { id: "windows", label: "Windows", format: ".exe", arch: "x64", version: "Windows 10+", note: "推荐版本，安装后即可开始归档。" },
-  { id: "macos", label: "macOS", format: ".dmg", arch: "Apple / Intel", version: "macOS 11+", note: "请按芯片架构选择对应安装包。" },
-  { id: "android", label: "Android", format: ".apk", arch: "arm64", version: "Android 8+", note: "适合在移动设备上查看与管理归档。" },
-  { id: "linux", label: "Linux", format: ".AppImage", arch: "x86_64", version: "主流发行版", note: "无需安装，赋予执行权限后直接运行。" },
 ] as const;
 
 const themeModes: { id: ThemeMode; label: string }[] = [
@@ -69,11 +66,6 @@ onMounted(() => {
 
   setDocumentTheme(themeMode.value);
   window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", onSystemThemeChange);
-
-  const agent = navigator.userAgent.toLowerCase();
-  if (agent.includes("android")) selectedPlatform.value = "android";
-  else if (agent.includes("mac")) selectedPlatform.value = "macos";
-  else if (agent.includes("linux")) selectedPlatform.value = "linux";
 
   updateScrollState();
   window.addEventListener("scroll", updateScrollState, { passive: true });
@@ -187,7 +179,7 @@ npm run tauri:build:windows</code></pre>
         <div class="tech-shell">
           <div class="tech-section__head js-reveal">
             <p class="tech-index">03 / STACK</p>
-            <div><h2>可信赖的本地技术栈</h2><p>桌面端、移动端与归档引擎共用同一套边界清晰的实现。</p></div>
+            <div><h2>可信赖的本地技术栈</h2><p>桌面端与归档引擎共用同一套边界清晰的实现。</p></div>
           </div>
           <div class="tech-marquee" aria-label="技术栈列表">
             <div class="tech-marquee__track">
