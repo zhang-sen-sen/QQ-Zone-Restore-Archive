@@ -4,11 +4,11 @@ This document is intended for AI agents and human collaborators working in this 
 
 ## Project Overview
 
-**QzoneArchive (空间归档)** is a cross-platform desktop / mobile tool that securely archives QQ Zone feeds, photos, videos, and interaction records to the local machine.
+**QzoneArchive (空间归档)** is a Windows desktop tool that securely archives QQ Zone feeds, photos, videos, and interaction records to the local machine.
 
 - **Tech Stack**: Tauri 2 + Rust backend; Vue 3 + TypeScript + Vite + PrimeVue 4 + Pinia frontend; SQLite local storage
 - **Core Features**: Complete archiving (own feeds / friend feeds / messages), resumable transfer, rate protection, interaction restoration, HTML export, media timeline, dark mode
-- **Target Platforms**: Windows / macOS / Linux desktop + Android mobile
+- **Target Platforms**: Windows 10 / 11 (NSIS installer + portable single EXE)
 - **License**: GPLv3
 
 ## Architecture
@@ -24,7 +24,7 @@ Archiving is based on QQ Zone's **mobile interaction list API** (`mobile.qzone.q
 - **QR Code Login**: Invokes QQ Zone's mobile scan-to-login flow; never touches the password.
 - **Web Login** (desktop only): Opens an independent window loading the QQ login page, then extracts login credentials via the WebView Cookie API.
 
-Login credentials (cookies) live in Rust memory while the app runs. On supported desktop platforms, the minimal restorable session is persisted only in the operating system credential store (macOS Keychain / Windows Credential Manager / Linux Secret Service). Credentials must never be written to SQLite, frontend storage, console output, or logs.
+Login credentials (cookies) live in Rust memory while the app runs. On desktop, the minimal restorable session is persisted only in the operating system credential store (Windows Credential Manager). Credentials must never be written to SQLite, frontend storage, console output, or logs.
 
 ### Project Structure
 
@@ -62,7 +62,6 @@ Login credentials (cookies) live in Rust memory while the app runs. On supported
 - [Rust](https://www.rust-lang.org/tools/install) 1.77+
 - [Node.js](https://nodejs.org/) 20+
 - Windows: [WebView2](https://developer.microsoft.com/microsoft-edge/webview2/) (bundled with Windows 10+)
-- Android: [Android Studio](https://developer.android.com/studio) + Android SDK + NDK
 
 ### Common Commands
 
@@ -81,12 +80,6 @@ npm run tauri:build:windows
 
 # Build Windows NSIS + MSI
 npm run tauri:build:windows:all
-
-# Android development
-npm run tauri android dev
-
-# Android APK build
-npm run tauri android build
 ```
 
 ### Rust Commands

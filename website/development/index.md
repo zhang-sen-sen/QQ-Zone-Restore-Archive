@@ -9,7 +9,6 @@ title: 开发
 - Node.js 20+
 - Rust 1.77+
 - Windows 开发环境需 WebView2
-- Android 开发还需要 Android Studio、SDK 与 NDK
 
 ```bash
 npm ci
@@ -30,4 +29,4 @@ npm run dev
 
 ## 提交与 Pull Request
 
-遵循仓库的 [贡献指南](https://github.com/xiaosu19/QQ-Zone-Restore-Archive/blob/main/CONTRIBUTING.md)。每个 PR 聚焦一个主题，使用 Conventional Commits 标题，并说明验证方式和风险。
+遵循仓库的 [贡献指南](https://github.com/zhang-sen-sen/QQ-Zone-Restore-Archive/blob/main/CONTRIBUTING.md)。每个 PR 聚焦一个主题，使用 Conventional Commits 标题，并说明验证方式和结果。

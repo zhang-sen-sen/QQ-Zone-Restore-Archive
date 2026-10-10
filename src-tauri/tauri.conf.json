@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "QQ Zone Restore Archive",
+  "productName": "QQ 空间恢复归档",
   "version": "2.0.0",
   "identifier": "top.ehre.qzonearchive",
   "build": {
@@ -28,18 +28,23 @@
       "csp": null,
       "assetProtocol": {
         "enable": true,
-        "scope": ["$APPCACHE/**/*", "$APPDATA/images/**/*"]
+        "scope": [
+          "$APPCACHE/**/*",
+          "$APPDATA/images/**/*"
+        ]
       }
     }
   },
   "bundle": {
     "active": true,
-    "targets": ["nsis", "dmg", "app"],
+    "targets": [
+      "nsis"
+    ],
     "publisher": "xiaosu19",
     "category": "Utility",
     "shortDescription": "尝试从互动记录还原 QQ 空间动态，并将照片、视频与评论安全归档到本地。",
     "longDescription": "QQ Zone Restore Archive 是基于 QzoneArchive 二次开发的本地归档工具，可尝试从仍存在的互动记录中还原动态、照片、视频、点赞和评论；不保证能够恢复没有互动痕迹或已被服务端彻底清除的内容。",
-    "copyright": "Copyright © 2026 xiaosu19 and QzoneArchive contributors",
+    "copyright": "Copyright © 2026 zhang-sen-sen and xiaosu19",
     "icon": [
       "icons/32x32.png",
       "icons/128x128.png",
@@ -48,26 +53,6 @@
       "icons/icon.icns",
       "icons/icon.ico"
     ],
-    "linux": {
-      "appimage": {
-        "bundleMediaFramework": true
-      },
-      "deb": {
-        "depends": [
-          "libwebkit2gtk-4.1-0",
-          "libgtk-3-0",
-          "gstreamer1.0-plugins-base",
-          "gstreamer1.0-plugins-good",
-          "gstreamer1.0-plugins-bad",
-          "gstreamer1.0-plugins-ugly",
-          "gstreamer1.0-libav",
-          "fonts-noto-cjk"
-        ]
-      }
-    },
-    "macOS": {
-      "signingIdentity": "-"
-    },
     "windows": {
       "webviewInstallMode": {
         "type": "downloadBootstrapper",
@@ -77,14 +62,20 @@
       "nsis": {
         "installerIcon": "icons/icon.ico",
         "installMode": "currentUser",
-        "languages": ["SimpChinese", "English"],
+        "languages": [
+          "SimpChinese",
+          "English"
+        ],
         "displayLanguageSelector": false,
         "compression": "lzma",
-        "startMenuFolder": "QQ Zone Restore Archive"
+        "startMenuFolder": "QQ空间恢复归档",
+        "template": "nsis-template/installer.nsi"
       },
       "wix": {
         "upgradeCode": "24779296-0f03-5f99-83ea-fc2fcda733b9",
-        "language": ["zh-CN", "en-US"]
+        "language": [
+          "zh-CN"
+        ]
       }
     }
   }
