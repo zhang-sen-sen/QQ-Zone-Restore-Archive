@@ -84,7 +84,7 @@ async function declineDisclaimer() {
   <Dialog :visible="!disclaimerAccepted" modal :closable="false" :draggable="false" :close-on-escape="false" class="disclaimer-dialog" header="免责声明与使用须知">
     <div class="disclaimer-heading"><span><i class="pi pi-shield" /></span><div><strong>请在使用恢复归档前仔细阅读</strong><small>协议版本：2026-08-26 · 只有同意后才能进入应用</small></div></div>
     <div class="disclaimer-content">
-      <section><h4>一、软件性质、来源与非官方声明</h4><p>QQ Zone Restore Archive（以下简称“本软件”）是基于 Gaoshu705/QzoneArchive 二次开发的本地工具，并参考 LibraHp/GetQzonehistory 的历史取数思路以及 ShunCai/QZoneExport 的空间资料接口实现；本项目遵循 GPLv3，QZoneExport 参考实现遵循 Apache-2.0。本软件与腾讯公司、QQ、QQ 空间及其关联主体不存在隶属、授权、合作、代理或担保关系，原项目和参考项目作者也不对本分支提供背书或担保。QQ、QQ 空间及相关名称、商标、接口与内容权利归相应权利人所有。</p></section>
+      <section><h4>一、软件性质、来源与非官方声明</h4><p>QQ Zone Restore Archive（以下简称“本软件”）是基于 Gaoshu705/QzoneArchive 与 xiaosu19/QQ-Zone-Restore-Archive 二次开发的本地工具，并参考 LibraHp/GetQzonehistory 的历史取数思路以及 ShunCai/QZoneExport 的空间资料接口实现；本项目遵循 GPLv3，QZoneExport 参考实现遵循 Apache-2.0。本软件与腾讯公司、QQ、QQ 空间及其关联主体不存在隶属、授权、合作、代理或担保关系，原项目和参考项目作者也不对本分支提供背书或担保。QQ、QQ 空间及相关名称、商标、接口与内容权利归相应权利人所有。</p></section>
       <section><h4>二、授权范围与账号责任</h4><p>你确认仅使用本人账号，或已获得账号所有人及相关内容权利人的合法、充分授权。你应妥善保管设备、二维码、Cookie、导出文件和缓存，不得出借账号、冒用身份或允许未经授权者访问。因账号共享、设备遗失、恶意软件、系统越权或保管不当造成的风险由相应责任方依法承担。</p></section>
       <section><h4>三、合法合规使用</h4><p>本软件仅供合法的个人备份、查阅与数据迁移使用。禁止用于非法侵入、批量爬取他人资料、绕过访问控制或技术保护、监控骚扰、撞库盗号、数据买卖、商业营销、侵犯隐私、侵犯著作权、传播违法有害信息，以及任何违反法律法规、公共秩序、第三方协议或平台规则的行为。不得利用本软件危害网络和数据安全。</p></section>
       <section><h4>四、个人信息与他人权益</h4><p>归档可能包含你及其他用户的 QQ 号、昵称、头像、动态、图片、视频、留言、评论和互动记录。你应遵循合法、正当、必要和最小范围原则，不得超出授权目的处理、公开或传播他人信息。向第三方分享 HTML、图片、视频或数据库前，应自行完成权限确认、必要脱敏并取得所需同意。</p></section>

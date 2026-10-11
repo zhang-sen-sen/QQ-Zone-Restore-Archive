@@ -2,7 +2,7 @@
 name = "qzonearchive"
 version = "2.0.0"
 description = "将 QQ 空间动态、照片、视频与互动记录安全归档到本地"
-authors = ["https://github.com/xiaosu19"]
+authors = ["https://github.com/zhang-sen-sen", "https://github.com/xiaosu19"]
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html

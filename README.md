@@ -72,7 +72,7 @@ AI collaborators: please read AGENTS.md for project-specific instructions, archi
 - **本地优先**：SQLite 数据库、媒体缓存和导出文件都保存在软件目录（便携版为 EXE 旁）；登录会话只进入操作系统安全凭据库
 - **检索与导出**：支持全文搜索、年份筛选、时间排序、批量管理与离线 HTML 导出
 - **桌面体验**：面向大数据量重新设计紧凑双列卡片、资料导航、暗色模式和窄屏布局
-- **跨平台发行**：提供 Windows 安装版（NSIS）与便携版（单 EXE）
+- **发行形式**：提供 Windows 安装版（NSIS）与便携版（单 EXE）
 
 完整版本历史请查看 [CHANGELOG.md](CHANGELOG.md)。
 
@@ -215,7 +215,7 @@ npm run tauri build --no-bundle
 - 您可以自由使用、修改与分发本软件，但任何修改或衍生作品必须以相同许可证（GPLv3）开源发布并提供源代码
 - 本软件按“现状”提供，不附带任何明示或默示的担保
 - 上游原作者：[xiaosu19/QQ-Zone-Restore-Archive](https://github.com/xiaosu19/QQ-Zone-Restore-Archive)（GPLv3）
-- 上游主仓库：[Gaoshu705/QzoneArchive](https://github.com/Gaoshu705/QzoneArchive)（GPLv3）
+- 原始上游项目：[Gaoshu705/QzoneArchive](https://github.com/Gaoshu705/QzoneArchive)（GPLv3）
 
 ## 友情链接
 
