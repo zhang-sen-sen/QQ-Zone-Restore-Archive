@@ -214,8 +214,7 @@ npm run tauri build --no-bundle
 
 - 您可以自由使用、修改与分发本软件，但任何修改或衍生作品必须以相同许可证（GPLv3）开源发布并提供源代码
 - 本软件按“现状”提供，不附带任何明示或默示的担保
-- 上游原作者：[xiaosu19/QQ-Zone-Restore-Archive](https://github.com/xiaosu19/QQ-Zone-Restore-Archive)（GPLv3）
-- 原始上游项目：[Gaoshu705/QzoneArchive](https://github.com/Gaoshu705/QzoneArchive)（GPLv3）
+- 上游原仓库：[xiaosu19/QQ-Zone-Restore-Archive](https://github.com/xiaosu19/QQ-Zone-Restore-Archive)（作者 xiaosu19，GPLv3）
 
 ## 友情链接
 
